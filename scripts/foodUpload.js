@@ -157,7 +157,7 @@ const FoodUpload = {
       formData.append('file', file);
       formData.append('user', Storage.getUsername());
 
-      const response = await fetch(`${this.API_URL}/detect`, {
+      const response = await fetch(`${this.API_URL}/detect/`, {
         method: 'POST',
         body: formData
       });
