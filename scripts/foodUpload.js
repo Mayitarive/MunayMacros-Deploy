@@ -172,8 +172,11 @@ const FoodUpload = {
         throw new Error('No se detectaron alimentos en la imagen');
       }
 
-      // Store all detected foods
-      this.currentFoods = data.detections;
+      // ✅ Agregar el índice
+      this.currentFoods = data.detections.map((detection, index) => ({
+        ...detection,
+        index: index
+      }));
 
       // Show processed image
       if (processedImage && data.image_path) {
@@ -184,7 +187,7 @@ const FoodUpload = {
       // Show all detections
       if (detectionsList) {
         detectionsList.innerHTML = '';
-        data.detections.forEach((detection, index) => {
+        this.currentFoods.forEach((detection, index) => {
           const detectionCard = document.createElement('div');
           detectionCard.className = 'detection-card mb-3 p-3 border rounded';
           detectionCard.innerHTML = `
